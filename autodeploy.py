@@ -23,7 +23,19 @@ headers = {
 # API URL to get latest commit
 url = f'https://api.github.com/repos/{owner}/{repo}/branches/{branch}' 
 response = requests.get(url, headers=headers) 
+"""
+if response.status_code == 200: 
+   
+    latest_commit_hash = response.json()['commit']['sha'] 
+    
+else:
 
+    print("Error fetching commit hash:", response.text)
+    latest_commit_hash = None
+
+# Check if there's a new commit
+previous_commit_hash_file = 'previous_commit_hash.txt' 
+"""
 if response.status_code == 200: 
    
     latest_commit_hash = response.json()['commit']['sha'] 
@@ -36,6 +48,17 @@ else:
 # Check if there's a new commit
 previous_commit_hash_file = 'previous_commit_hash.txt' 
 
+if os.path.exists(previous_commit_hash_file):
+    with open(previous_commit_hash_file, 'r') as file: 
+        previous_commit_hashes = file.read().strip().split('\n')
+else:
+    previous_commit_hashes = []
+
+if latest_commit_hash not in previous_commit_hashes:
+    previous_commit_hashes.append(latest_commit_hash)
+
+with open(previous_commit_hash_file, 'w') as file:
+    file.write('\n'.join(previous_commit_hashes))
 
 if os.path.exists(previous_commit_hash_file):
     with open(previous_commit_hash_file, 'r') as file: 
