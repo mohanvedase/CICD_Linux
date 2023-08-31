@@ -55,6 +55,7 @@ else:
     previous_commit_hashes = []
 
 if latest_commit_hash not in previous_commit_hashes:
+    # <-- This line is indented correctly now.
     previous_commit_hashes.append(latest_commit_hash)
 
 with open(previous_commit_hash_file, 'w') as file:
