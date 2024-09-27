@@ -1,7 +1,0 @@
-access_token = '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'
-owner = 'mohanvedase'
-repo = 'CICD_Linux'
-branch ='main' 
-local_repo = 'C:/Users/Admin/OneDrive/Desktop/CICD_Assignment/CICD_Linux/'
-nginx_path ='/var/www/CICD_Linux'
-files_to_copy ='index.html'
